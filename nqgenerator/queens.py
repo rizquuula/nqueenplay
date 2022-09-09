@@ -26,6 +26,20 @@ class Queens:
         
         self._create_queens(n, number_lock)
         self._place_queens()
+
+    def move_up(self, queens_index: int, movement_length: int=1):
+        self._move(queens_index, MovementDirection.UP, movement_length)
+    
+    def move_down(self, queens_index: int, movement_length: int=1):
+        self._move(queens_index, MovementDirection.DOWN, movement_length)
+    
+    def move_random(self, queens_index: int):
+        try:
+            direction = choice([MovementDirection.DOWN, MovementDirection.UP])
+            movement_length = randint(1, self._number_of_queens)
+            self._move(queens_index, direction, movement_length)
+        except MovementIndexException:
+            self.move_random(queens_index)
     
     def get_attack_pairs(self):
         pairs = []
@@ -49,32 +63,24 @@ class Queens:
 
         return attack_pairs
     
-    def show_attack_pairs(self):
+    def show_attacking_pairs(self):
         # attack pairs
         attack_pairs = self.get_attack_pairs()
         print('attack_pairs', [(p[0][0], p[1][0]) for p in attack_pairs])
         print(f'Number of attacking pair(s): {len(attack_pairs)}')
-    
-    # def move_left(self, queens_index: int):
-    #     self._move(queens_index, MovementDirection.LEFT)
-    
-    def move_up(self, queens_index: int, movement_length: int=1):
-        self._move(queens_index, MovementDirection.UP, movement_length)
-    
-    # def move_right(self, queens_index: int):
-    #     self._move(queens_index, MovementDirection.RIGHT)
-    
-    def move_down(self, queens_index: int, movement_length: int=1):
-        self._move(queens_index, MovementDirection.DOWN, movement_length)
-    
-    def move_random(self, queens_index: int):
-        try:
-            direction = choice([MovementDirection.DOWN, MovementDirection.UP])
-            movement_length = randint(1, self._number_of_queens)
-            self._move(queens_index, direction, movement_length)
-        except MovementIndexException:
-            self.move_random(queens_index)
-    
+           
+    def show(self):
+        # chessboard
+        mult = self._number_of_queens
+        print('  ' + ''.join([f'  {i+1} ' for i in range(self._number_of_queens)]))
+        for i in range(self._number_of_queens):
+            row = self._chessboard[i]
+            print('  ' + '----'*mult + '-')
+            print(f"{self._number_of_queens - i} | {' | '.join(row)} | {self._number_of_queens - i}")
+        
+        print('  ' + '----'*mult + '-')
+        print('  ' + ''.join([f'  {i+1} ' for i in range(self._number_of_queens)]))
+         
     def _get_next_pos(self, pos: tuple, direction: str, movement_length:int):
         next_position = ()
         x, y = pos
@@ -109,27 +115,7 @@ class Queens:
         else:
             self.queens_position[queens_index] = next_position
             self._place_queens()
-            
-    def show(self):
-        # chessboard
-        mult = self._number_of_queens
-        print('  ' + ''.join([f'  {i+1} ' for i in range(self._number_of_queens)]))
-        for i in range(self._number_of_queens):
-            row = self._chessboard[i]
-            print('  ' + '----'*mult + '-')
-            print(f"{self._number_of_queens - i} | {' | '.join(row)} | {self._number_of_queens - i}")
-        
-        print('  ' + '----'*mult + '-')
-        print('  ' + ''.join([f'  {i+1} ' for i in range(self._number_of_queens)]))
-        
-        # attack pairs
-        # attack_pairs = self.get_attack_pairs()
-        # print('attack_pairs', [(p[0][0], p[1][0]) for p in attack_pairs])
-        # print(f'Number of attacking pair(s): {len(attack_pairs)}')
-        # print()
-        # queens_pos = [f"Q{i+1}={self.queens_position[i]}" for i in range(self._number_of_queens)]
-        # print(f'Queen positions: {", ".join(queens_pos)}')
-    
+
     def _create_initial_chessboard(self, n: int):
         chessboard = []
         for x in range(n):

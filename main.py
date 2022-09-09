@@ -1,6 +1,9 @@
 from nqgenerator import Queens
 
-nqueens = Queens(n=4, number_lock=0)
+nqueens = Queens(n=8, number_lock=1)
 nqueens.show()
-nqueens.move_random(2)
+nqueens.show_attacking_pairs()
+
+nqueens.move_down(2, 6)
 nqueens.show()
+nqueens.show_attacking_pairs()
