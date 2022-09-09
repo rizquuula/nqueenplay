@@ -14,15 +14,19 @@ class Queens:
         self._place_queens()
     
     def show(self):
+        mult = (len(self.chessboard)*4+1)
         for row in self.chessboard:
-            print(row)
+            print('-'*mult)
+            print(f"| {' | '.join(row)} |")
+        
+        print('-'*mult)
     
     def _create_chessboard(self, n: int):
         chessboard = []
         for x in range(n):
             row = []
             for y in range(n):
-                row.append('_')
+                row.append(' ')
             chessboard.append(row)
         
         # assign
