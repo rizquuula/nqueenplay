@@ -1,0 +1,1 @@
+from .queens import NQueen

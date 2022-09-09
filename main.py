@@ -1,6 +1,6 @@
-from nqgenerator import Queens
+from nqueenplay import NQueen
 
-nqueens = Queens(n=8, number_lock=1)
+nqueens = NQueen(n=8, number_lock=1)
 nqueens.show()
 nqueens.show_attacking_pairs()
 

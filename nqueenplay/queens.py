@@ -5,7 +5,7 @@ from .exceptions import MovementIndexException, OverlappingQueenException, Movem
 from .move_direction import MovementDirection
 
 
-class Queens:
+class NQueen:
     '''N-Queens Puzzle'''
     def __init__(self, n: int, number_lock: int=0):
         self.queens_position = []
@@ -181,11 +181,10 @@ class Queens:
         self._create_initial_chessboard(self._number_of_queens)
         
         for pos in self.queens_position:
-            x = pos[0] #self.number_of_queens - coord[0] - 1
-            y = pos[1] #self.number_of_queens - coord[1] - 1
-            if x >= 1 and y >= 1:
-                x-=1
-                y = self._number_of_queens - y
+            # check position validation
+            if not self._check_movement_pos_index(pos):
+                x = pos[0] - 1
+                y = self._number_of_queens - pos[1]
                 self._chessboard[y][x] = self._queen_symbol
             else:
                 raise ValueError('Only accept integer >= 1')
