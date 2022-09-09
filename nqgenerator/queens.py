@@ -1,7 +1,13 @@
-from random import randint, uniform
+from random import choice, randint, uniform
 import random
 
-class MovementException(Exception):
+class OverlappingQueenException(Exception):
+    ...
+
+class MovementIndexException(Exception):
+    ...
+
+class MovementDirectionException(Exception):
     ...
     
 class MovementDirection:
@@ -35,6 +41,14 @@ class Queens:
     def move_down(self, queens_index: int, movement_length: int=1):
         self._move(queens_index, MovementDirection.DOWN, movement_length)
     
+    def move_random(self, queens_index: int):
+        try:
+            direction = choice([MovementDirection.DOWN, MovementDirection.UP])
+            movement_length = randint(1, self.number_of_queens)
+            self._move(queens_index, direction, movement_length)
+        except MovementIndexException:
+            self.move_random(queens_index)
+    
     def _get_next_pos(self, pos: tuple, direction: str, movement_length:int):
         next_position = ()
         x, y = pos
@@ -47,7 +61,7 @@ class Queens:
         elif direction == MovementDirection.DOWN:
             next_position = (x, y-movement_length)
         else:
-            raise MovementException('Invalid movement direction')
+            raise MovementDirectionException('Invalid movement direction')
         return next_position
     
     def _check_movement_pos_index(self, pos: tuple):
@@ -63,9 +77,9 @@ class Queens:
             )
         
         if next_position in self.queens_position:
-            raise MovementException('There are other Queen in this place')
+            raise OverlappingQueenException('There are other Queen in this place')
         elif self._check_movement_pos_index(next_position):
-            raise MovementException('Movement index out of range')
+            raise MovementIndexException('Movement index out of range')
         else:
             self.queens_position[queens_index] = next_position
             self._place_queens()
@@ -87,7 +101,7 @@ class Queens:
         queens_pos = [f"Q{i+1}={self.queens_position[i]}" for i in range(self.number_of_queens)]
         print(f'Queen positions: {", ".join(queens_pos)}')
     
-    def _create_chessboard(self, n: int):
+    def _create_initial_chessboard(self, n: int):
         chessboard = []
         for x in range(n):
             row = []
@@ -115,7 +129,7 @@ class Queens:
         self.queens_position = x_y_positions
     
     def _place_queens(self):
-        self._create_chessboard(self.number_of_queens)
+        self._create_initial_chessboard(self.number_of_queens)
         
         for pos in self.queens_position:
             x = pos[0] #self.number_of_queens - coord[0] - 1
