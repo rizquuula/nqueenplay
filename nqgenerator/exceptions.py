@@ -1,0 +1,9 @@
+class OverlappingQueenException(Exception):
+    ...
+
+class MovementIndexException(Exception):
+    ...
+
+class MovementDirectionException(Exception):
+    ...
+   
