@@ -1,16 +1,17 @@
-from random import randint
+from random import randint, uniform
+import random
 
 
 class Queens:
-    def __init__(self, n: int):
+    def __init__(self, n: int, number_lock: int=0):
         self.number_of_queens = n
-        self.chessboard = []
+        self.queens_position = []
         
+        self._chessboard = []
         self._queen_symbol = 'Q'
-        self._queens_position = []
         self._attack_pairs = 0
         
-        self._create_queens(n)
+        self._create_queens(n, number_lock)
         self._create_chessboard(n)
         self._place_queens()
         self._count_attack_pairs()
@@ -26,11 +27,11 @@ class Queens:
         # |   | Q | Q |   |
         # -----------------
         
-        mult = (len(self.chessboard))
+        mult = (len(self._chessboard))
         
         print('  ' + ''.join([f'  {i+1} ' for i in range(self.number_of_queens)]))
         for i in range(self.number_of_queens):
-            row = self.chessboard[i]
+            row = self._chessboard[i]
             print('  ' + '----'*mult + '-')
             print(f"{self.number_of_queens - i} | {' | '.join(row)} | {self.number_of_queens - i}")
         
@@ -47,27 +48,30 @@ class Queens:
             chessboard.append(row)
         
         # assign
-        self.chessboard = chessboard
+        self._chessboard = chessboard
     
-    def _create_queens(self, n:int):
+    def _create_queens(self, n:int, number_lock: int=0):
+        if number_lock != 0:
+            random.seed(number_lock)
+            
         x_y_positions = []
         while len(x_y_positions) < n:
-            pos_x = randint(1, n)
-            pos_y = randint(1, n)
+            pos_x = round(uniform(1, n))
+            pos_y = round(uniform(1, n))
             if (pos_x, pos_y) not in x_y_positions:
                 x_y_positions.append((pos_x, pos_y))
         
         # assign
-        self._queens_position = x_y_positions
+        self.queens_position = x_y_positions
     
     def _place_queens(self):
-        for pos in self._queens_position:
+        for pos in self.queens_position:
             x = pos[0] #self.number_of_queens - coord[0] - 1
             y = pos[1] #self.number_of_queens - coord[1] - 1
             if x >= 1 and y >= 1:
                 x-=1
                 y = self.number_of_queens - y
-                self.chessboard[y][x] = self._queen_symbol
+                self._chessboard[y][x] = self._queen_symbol
             else:
                 raise ValueError('Only accept integer >= 1')
             
@@ -80,8 +84,8 @@ class Queens:
     def _count_attack_pairs(self):
         pairs = []
         gradients = []
-        for pos_1 in self._queens_position:
-            for pos_2 in self._queens_position:
+        for pos_1 in self.queens_position:
+            for pos_2 in self.queens_position:
                 pair = [pos_1, pos_2]
                 pair.sort()
                 if pos_1 != pos_2 and pair not in pairs:
