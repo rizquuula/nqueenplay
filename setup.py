@@ -8,7 +8,7 @@ BASE_DIR = pathlib.Path(__file__).parent
 README = (BASE_DIR / "README.md").read_text()
 
 setup(
-    name="nquuenplay",
+    name="nqueenplay",
     version=VERSION,
     author="eiproject",
     author_email="razifrizqullah@gmail.com",
