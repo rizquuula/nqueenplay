@@ -1,5 +1,6 @@
 venv
 .idea
+.env
 
 *.pyc
 __pycache__
@@ -7,3 +8,7 @@ __pycache__
 *.zip
 
 launch.json
+
+build 
+dist
+*.egg-info
