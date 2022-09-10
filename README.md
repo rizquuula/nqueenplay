@@ -24,6 +24,10 @@
 
 `nqueenplay` is N-Queens puzzle player. This tool will generate randomly or randomly locked puzzle, you may use this as "a boxing bag" to practice problem solving algorithm.
 
+![GitHub](https://img.shields.io/github/license/eiproject/nqueenplay)
+![GitHub repo size](https://img.shields.io/github/repo-size/eiproject/nqueenplay)
+![GitHub contributors](https://img.shields.io/github/contributors/eiproject/nqueenplay)
+
 ## Installation
 
 This python package available on pip installation using

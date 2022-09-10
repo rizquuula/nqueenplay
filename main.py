@@ -10,8 +10,7 @@ from nqueenplay import NQueen
 # nqueens.show()
 # nqueens.show_attacking_pairs()
 
-N = 4
+N = 8
 nqueens = NQueen(n=N, number_lock=1)
 nqueens.show()
-nqueens.move_random(queens_index=3)
-nqueens.show()
+nqueens.show_attacking_pairs()
