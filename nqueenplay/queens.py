@@ -42,7 +42,7 @@ class NQueen:
         """Randomly move the selected Queen
 
         Args:
-            queens_index (int): _description_
+            queens_index (int): index of selected Queen
         """
         try:
             direction = choice([MovementDirection.DOWN, MovementDirection.UP])
