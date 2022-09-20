@@ -33,36 +33,36 @@ class NQueen:
         """
         return self._queens_position
 
-    def move_up(self, queen_index: int, movement_length: int = 1) -> None:
+    def move_up(self, queen_pos: int, movement_length: int = 1) -> None:
         """Move the selected Queen up side
 
         Args:
-            queen_index (int): index of selected Queen
+            queen_pos (int): index of selected Queen
             movement_length (int, optional): movement length. Defaults to 1.
         """
-        self._move(queen_index, MovementDirection.UP, movement_length)
+        self._move(queen_pos, MovementDirection.UP, movement_length)
 
-    def move_down(self, queen_index: int, movement_length: int = 1) -> None:
+    def move_down(self, queen_pos: int, movement_length: int = 1) -> None:
         """Move the selected Queen down side
 
         Args:
-            queen_index (int): index of selected Queen
+            queen_pos (int): index of selected Queen
             movement_length (int, optional): movement length. Defaults to 1.
         """
-        self._move(queen_index, MovementDirection.DOWN, movement_length)
+        self._move(queen_pos, MovementDirection.DOWN, movement_length)
 
-    def move_random(self, queen_index: int) -> None:
+    def move_random(self, queen_pos: int) -> None:
         """Randomly move the selected Queen
 
         Args:
-            queen_index (int): index of selected Queen
+            queen_pos (int): index of selected Queen
         """
         try:
             direction = choice([MovementDirection.DOWN, MovementDirection.UP])
             movement_length = randint(1, self._number_of_queens)
-            self._move(queen_index, direction, movement_length)
+            self._move(queen_pos, direction, movement_length)
         except MovementIndexException:
-            self.move_random(queen_index)
+            self.move_random(queen_pos)
 
     def get_attack_pairs(self) -> List[Tuple[int, int]]:
         """Get attack pairs, each pair consist from two Queen index
@@ -136,11 +136,11 @@ class NQueen:
         return pos[0] < 1 or pos[1] < 1 \
             or pos[0] > self._number_of_queens or pos[1] > self._number_of_queens
 
-    def _move(self, queen_index: int, direction: str, movement_length: int) -> None:
+    def _move(self, queen_pos: int, direction: str, movement_length: int) -> None:
         '''Move queen with direction and length'''
-        queen_index -= 1
+        queen_pos -= 1
         next_position = self._get_next_pos(
-            pos=self._queens_position[queen_index],
+            pos=self._queens_position[queen_pos],
             direction=direction,
             movement_length=movement_length,
         )
@@ -151,7 +151,7 @@ class NQueen:
         elif self._check_movement_pos_index(next_position):
             raise MovementIndexException('Movement index out of range')
         else:
-            self._queens_position[queen_index] = next_position
+            self._queens_position[queen_pos] = next_position
             self._place_queens()
 
     def _create_initial_chessboard(self, n: int) -> None:
