@@ -17,8 +17,16 @@ class NQueen:
         self._create_random_queens(n, number_lock)
         self._place_queens()
 
-    def get_queen_position(self) -> List[Tuple[int, int]]:
-        """Get Queen position
+    def get_number_of_queens(self) -> int:
+        """Get number of Queens
+
+        Returns:
+            int: Number of Queens
+        """
+        return self._number_of_queens
+
+    def get_queen_positions(self) -> List[Tuple[int, int]]:
+        """Get Queen positions
 
         Returns:
             List[Tuple[int, int]]: Queen positions

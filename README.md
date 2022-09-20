@@ -68,6 +68,23 @@ lock = 1 # any integer
 nqueens = NQueen(n=N, number_lock=lock)
 ```
 
+### Get Number of Queens
+
+To get number of queen:
+
+```py
+N = 4
+nqueens = NQueen(n=N, number_lock=1)
+number_of_queen = nqueens.get_number_of_queens()
+```
+
+Output:
+
+```py
+print(number_of_queen)
+# 4
+```
+
 ### Get Queens Position
 
 To get queen position:
@@ -75,7 +92,7 @@ To get queen position:
 ```py
 N = 4
 nqueens = NQueen(n=N, number_lock=1)
-positions = nqueens.get_queen_position()
+positions = nqueens.get_queen_positions()
 ```
 
 Output:
