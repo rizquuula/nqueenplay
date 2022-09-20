@@ -1,1 +1,2 @@
-VERSION = '0.0.1'
+# Current active version
+VERSION = '0.0.2'

@@ -68,6 +68,25 @@ lock = 1 # any integer
 nqueens = NQueen(n=N, number_lock=lock)
 ```
 
+### Get Queens Position
+
+To get queen position:
+
+```py
+N = 4
+nqueens = NQueen(n=N, number_lock=1)
+positions = nqueens.get_queen_position()
+```
+
+Output:
+
+```py
+print(positions)
+# [(1, 1), (2, 4), (3, 3), (4, 2)]
+```
+
+Each tuple is The Queen coordinate, there is 4 attack pairs
+
 ### Check Number of Attack Pairs
 
 To check how many attack pairs in the current board:
