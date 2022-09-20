@@ -178,7 +178,7 @@ Move Queen to upside with specific range:
 N = 4
 nqueens = NQueen(n=N, number_lock=1)
 nqueens.show()
-nqueens.move_up(queens_index=1, movement_length=2)
+nqueens.move_up(queen_index=1, movement_length=2)
 nqueens.show()
 ```
 
@@ -217,7 +217,7 @@ Move Queen to downside with specific range:
 N = 4
 nqueens = NQueen(n=N, number_lock=1)
 nqueens.show()
-nqueens.move_down(queens_index=2, movement_length=2)
+nqueens.move_down(queen_index=2, movement_length=2)
 nqueens.show()
 ```
 
@@ -256,7 +256,7 @@ Move Queen to random place in the column:
 N = 4
 nqueens = NQueen(n=N, number_lock=1)
 nqueens.show()
-nqueens.move_random(queens_index=3)
+nqueens.move_random(queen_index=3)
 nqueens.show()
 ```
 
