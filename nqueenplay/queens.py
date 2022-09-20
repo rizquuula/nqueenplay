@@ -33,7 +33,7 @@ class NQueen:
         """
         return self._queens_position
 
-    def move_up(self, queens_index: int, movement_length: int = 1):
+    def move_up(self, queens_index: int, movement_length: int = 1) -> None:
         """Move the selected Queen up side
 
         Args:
@@ -42,7 +42,7 @@ class NQueen:
         """
         self._move(queens_index, MovementDirection.UP, movement_length)
 
-    def move_down(self, queens_index: int, movement_length: int = 1):
+    def move_down(self, queens_index: int, movement_length: int = 1) -> None:
         """Move the selected Queen down side
 
         Args:
@@ -51,7 +51,7 @@ class NQueen:
         """
         self._move(queens_index, MovementDirection.DOWN, movement_length)
 
-    def move_random(self, queens_index: int):
+    def move_random(self, queens_index: int) -> None:
         """Randomly move the selected Queen
 
         Args:
@@ -90,7 +90,7 @@ class NQueen:
 
         return attack_pairs
 
-    def show_attacking_pairs(self):
+    def show_attacking_pairs(self) -> None:
         """Print attack pairs to console
         """
         # attack pairs
@@ -98,7 +98,7 @@ class NQueen:
         print('attack_pairs', [(p[0][0], p[1][0]) for p in attack_pairs])
         print(f'Number of attacking pair(s): {len(attack_pairs)}')
 
-    def show(self):
+    def show(self) -> None:
         """Print current chessboard to console
         """
         # chessboard
@@ -115,7 +115,7 @@ class NQueen:
         print(
             '  ' + ''.join([f'  {i+1} ' for i in range(self._number_of_queens)]))
 
-    def _get_next_pos(self, pos: tuple, direction: str, movement_length: int):
+    def _get_next_pos(self, pos: tuple, direction: str, movement_length: int) -> Tuple[int, int]:
         '''Get next position using movement'''
         next_position = ()
         x, y = pos
@@ -131,12 +131,12 @@ class NQueen:
             raise MovementDirectionException('Invalid movement direction')
         return next_position
 
-    def _check_movement_pos_index(self, pos: tuple):
+    def _check_movement_pos_index(self, pos: tuple) -> bool:
         '''Check, is the movement position is valid or not based on index'''
         return pos[0] < 1 or pos[1] < 1 \
             or pos[0] > self._number_of_queens or pos[1] > self._number_of_queens
 
-    def _move(self, queens_index: int, direction: str, movement_length: int):
+    def _move(self, queens_index: int, direction: str, movement_length: int) -> None:
         '''Move queen with direction and length'''
         queens_index -= 1
         next_position = self._get_next_pos(
@@ -154,7 +154,7 @@ class NQueen:
             self._queens_position[queens_index] = next_position
             self._place_queens()
 
-    def _create_initial_chessboard(self, n: int):
+    def _create_initial_chessboard(self, n: int) -> None:
         '''Initial blank chessboard, use this to refresh chessboard'''
         chessboard = []
         for _ in range(n):
@@ -166,7 +166,7 @@ class NQueen:
         # assign
         self._chessboard = chessboard
 
-    def _create_random_queens(self, n: int, number_lock: int = 0):
+    def _create_random_queens(self, n: int, number_lock: int = 0) -> None:
         '''Create random queen position'''
         if number_lock != 0:
             seed(number_lock)
@@ -183,7 +183,7 @@ class NQueen:
         # assign
         self._queens_position = x_y_positions
 
-    def _place_queens(self):
+    def _place_queens(self) -> None:
         '''Place queen position to board'''
         self._create_initial_chessboard(self._number_of_queens)
 
@@ -196,7 +196,7 @@ class NQueen:
             else:
                 raise ValueError('Only accept integer >= 1')
 
-    def _count_gradient(self, pos_1: tuple, pos_2: tuple):
+    def _count_gradient(self, pos_1: tuple, pos_2: tuple) -> float:
         '''Count the gradient between two point'''
         x1, y1 = pos_1
         x2, y2 = pos_2
