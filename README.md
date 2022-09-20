@@ -248,6 +248,45 @@ output:
     1   2   3   4 
 ```
 
+#### Move the queen on specific neighbor
+
+Move Queen to a specific neighbor by neighbor row position:
+
+```py
+N = 4
+nqueens = NQueen(n=N, number_lock=1)
+nqueens.show()
+nqueens.move_to(queen_pos=2, target_pos=1)
+nqueens.show()
+```
+
+output:
+
+```py
+    1   2   3   4 
+  -----------------
+4 |   | Q |   |   | 4
+  -----------------
+3 |   |   | Q |   | 3
+  -----------------
+2 |   |   |   | Q | 2
+  -----------------
+1 | Q |   |   |   | 1
+  -----------------
+    1   2   3   4 
+    1   2   3   4 
+  -----------------
+4 |   |   |   |   | 4
+  -----------------
+3 |   |   | Q |   | 3
+  -----------------
+2 |   |   |   | Q | 2
+  -----------------
+1 | Q | Q |   |   | 1
+  -----------------
+    1   2   3   4 
+```
+
 #### Move the queen to a random placement
 
 Move Queen to random place in the column:

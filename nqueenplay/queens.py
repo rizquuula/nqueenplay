@@ -51,6 +51,18 @@ class NQueen:
         """
         self._move(queen_pos, MovementDirection.DOWN, movement_length)
 
+    def move_to(self, queen_pos: int, target_pos: int) -> None:
+        """Move the selected Queen to specific row or neighbor
+
+        Args:
+            queen_pos (int): index of selected Queen
+            next_pos (int): target position.
+        """
+        queen_index = queen_pos-1 # Note: queen_index != queen_pos
+        _, current_queen_row = self.get_queen_positions()[queen_index]
+        movement_length = target_pos-current_queen_row
+        self._move(queen_pos, MovementDirection.UP, movement_length)
+
     def move_random(self, queen_pos: int) -> None:
         """Randomly move the selected Queen
 
