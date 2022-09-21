@@ -156,7 +156,7 @@ To show the current board attack pairs:
 ```py
 N = 4
 nqueens = NQueen(n=N, number_lock=1)
-nqueens.show_attacking_pairs()
+nqueens.show_attack_pairs()
 ```
 
 output
