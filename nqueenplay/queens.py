@@ -26,6 +26,14 @@ class NQueen:
         """
         return self._number_of_queens
 
+    def get_number_of_attack_pairs(self) -> int:
+        """Get number of attack pairs
+
+        Returns:
+            int: Number of Queens
+        """
+        return len(self.get_attack_pairs())
+
     def get_queen_positions(self) -> List[Tuple[int, int]]:
         """Get Queen positions
 
@@ -33,6 +41,32 @@ class NQueen:
             List[Tuple[int, int]]: Queen positions
         """
         return self._queens_position
+
+    def get_attack_pairs(self) -> List[Tuple[int, int]]:
+        """Get attack pairs, each pair consist from two Queen index
+
+        Returns:
+            List[Tuple[int, int]]: attack pairs
+        """
+        pairs = []
+        gradients = []
+        for pos_1 in self._queens_position:
+            for pos_2 in self._queens_position:
+                pair = [pos_1, pos_2]
+                pair.sort()
+                if pos_1 != pos_2 and pair not in pairs:
+                    gradient = self._count_gradient(pos_1, pos_2)
+
+                    pairs.append(pair)
+                    gradients.append(gradient)
+
+        attack_pairs = []
+        for i, gra in enumerate(gradients):
+            pair = pairs[i]
+            if abs(gra) == 0 or abs(gra) == 1:
+                attack_pairs.append(pair)
+
+        return attack_pairs
 
     def move_up(self, queen_pos: int, movement_length: int = 1) -> None:
         """Move the selected Queen up side
@@ -76,32 +110,6 @@ class NQueen:
             self._move(queen_pos, direction, movement_length)
         except MovementIndexException:
             self.move_random(queen_pos)
-
-    def get_attack_pairs(self) -> List[Tuple[int, int]]:
-        """Get attack pairs, each pair consist from two Queen index
-
-        Returns:
-            List[Tuple[int, int]]: attack pairs
-        """
-        pairs = []
-        gradients = []
-        for pos_1 in self._queens_position:
-            for pos_2 in self._queens_position:
-                pair = [pos_1, pos_2]
-                pair.sort()
-                if pos_1 != pos_2 and pair not in pairs:
-                    gradient = self._count_gradient(pos_1, pos_2)
-
-                    pairs.append(pair)
-                    gradients.append(gradient)
-
-        attack_pairs = []
-        for i, gra in enumerate(gradients):
-            pair = pairs[i]
-            if abs(gra) == 0 or abs(gra) == 1:
-                attack_pairs.append(pair)
-
-        return attack_pairs
 
     def copy(self):
         """Make duplicate of current NQueen instance
