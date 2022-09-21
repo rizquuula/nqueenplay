@@ -1,5 +1,6 @@
 from random import choice, randint, uniform, seed
 from typing import List, Tuple
+from copy import copy
 
 from .exceptions import MovementIndexException, OverlappingQueenException, MovementDirectionException
 from .move_direction import MovementDirection
@@ -102,7 +103,12 @@ class NQueen:
 
         return attack_pairs
 
-    def show_attacking_pairs(self) -> None:
+    def copy(self):
+        """Make duplicate of current NQueen instance
+        """
+        return copy(self)
+
+    def show_attack_pairs(self) -> None:
         """Print attack pairs to console
         """
         # attack pairs
